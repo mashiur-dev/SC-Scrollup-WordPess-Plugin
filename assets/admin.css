@@ -1,0 +1,118 @@
+/* Settings page */
+.scup-settings {
+	display: flex;
+	flex-direction: row;
+}
+.scup-settings .scup-fields {
+	flex: 70%;
+}
+.scup-settings .scup-fields > h1 {
+	font-size: 18px;
+	text-transform: uppercase;
+}
+.scup-settings .scup-recommendations {
+	flex: 30%;
+}
+
+@media (max-width: 800px) {
+  .scup-settings {
+    flex-direction: column;
+  }
+
+  .scup-settings .scup-fields, 
+  .scup-settings .scup-recommendations {
+    flex: 100%;
+  }
+}
+
+/* Recomendation */
+.scup-settings .scup-recommendations img {
+	max-width: 100%;
+}
+.scup-settings .scup-recommendations h2 {
+	font-size: 18px;
+	padding-left: 10px;
+	text-transform: uppercase;
+	line-height: 24px;
+}
+.scup-settings .scup-recommendations h2:after {
+	content: "";
+	width: 40px;
+	height: 8px;
+	background: #2271b1;
+	display: block;
+	margin-top: 10px;
+}
+
+/* Toggle switch */
+.jsp_switch
+{
+  display: inline-flex;
+  margin: 0;
+}
+.jsp_switch input[type="checkbox"] {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+	display: none;
+}
+.jsp_switch input[type=checkbox]:checked + label
+{
+  background: #2271b1;
+}
+.jsp_switch input[type=checkbox]:checked + label::after
+{
+  left: calc(100% - 4px);
+  transform: translateX(-100%);
+}
+.jsp_switch label
+{
+  cursor: pointer;
+  width: 48px;
+  height: 24px;
+  background: grey;
+  display: block;
+  border-radius: 24px;
+  position: relative;
+}
+.jsp_switch label::after
+{
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+/* icon Picker */
+.jomps-icons .jomps-icons-selector {
+	width: 250px;
+	height: 80px;
+	background: #ffffff;
+	padding: 5px 5px;
+	box-shadow: 0px 0px 1px 1px #ddd;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	resize: both;
+}
+
+.jomps-icons .jomps-icons-selector li {
+	display: inline-block;
+	width: 55px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 18px;
+	line-height: 30px;
+	border: 1px solid transparent;
+}
+
+.jomps-icons .jomps-icons-selector li:hover,
+.jomps-icons .jomps-icons-selector li.active {
+	color: #2271b1;
+	cursor: pointer;
+	border: 1px solid #c3d7e8;
+}
