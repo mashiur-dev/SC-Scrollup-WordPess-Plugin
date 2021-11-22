@@ -1,29 +1,26 @@
-=== SC Scrollup ===
-Tags: Scroll up, Scroll to top, jQuery Animated scrollup, Smoothly scroll to top, Multi color scrollup, Customizable scrollup
-Requires at least: 3.0.1
-Tested up to: 3.9
-Stable tag: 1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== SC Scrollup - Extreamly lightweight and customizable scroll to top plugin  ===
+Contributors: mashiurz, jompha
+Tags: Scroll up, Scroll to top, scrollup, Smoothly scroll up, Multi color scrollup, Customizable
+Requires at least: 4.0
+Tested up to: 5.8
+Stable tag: 1.5
+Requires PHP: 5.4
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Easy manageable Scroll up plugin with lots of options and highly customizable scroll-up!
+A light weight and customizable Scroll to top plugin with unlimited themes!
 
 == Description ==
 
-The Plugin will Add a scroll up button on your website. This is just not a simple scroll-up plugin, but also a friend of your users. It's highly customize-able scrollup plugin so you can make it look better as you need.
+This Plugin will Add a scroll to top button to your website. This is not just a simple scroll up plugin, but also a friend of your users. It's highly customizeable so you can make it look as you need.
 
-
-<strong>Sc Scrollup Features</strong><br>
+<strong>Features</strong><br>
 <ul>
-	<li>Unlimited Scrollup Color</li>
-	<li>Fontawesome icon supported</li>
-	<li>Lots of options</li>
-	<li>Light weight scroll up plugin, only 6kb!</li>
-	<li>Highly Customize able scroll-up plugin</li>
+	<li>Unlimited Color</li>
+	<li>Fontawesome icons</li>
+	<li>Easy to customize</li>
+	<li>Extreamly Lightweight</li>
 </ul>
-
-Sc Scrollup Plugin Demo: http://plugins.stylishcreativity.com/sc-scrollup/
-
 
 == Installation ==
 
@@ -38,11 +35,15 @@ e.g.
 == Frequently Asked Questions ==
 
 
-
 == Screenshots ==
-1. Sc Scrollup Option panel
+1. Option panel
+1. Demo scroll to top
 
 == Changelog ==
 
 = 1.0 =
 * Initial Release
+
+= 1.5 =
+* Fontawesome version updated
+* Settings UI updated

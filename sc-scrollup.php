@@ -14,25 +14,20 @@ Text Domain: sc-scrollup
 */
 
 /* Call latest jquery */
-function scupEnqueue(){
+function scupEnqueue()
+{
 	wp_enqueue_script('jquery');
 	wp_enqueue_style( 'fontawesome', '//use.fontawesome.com/releases/v5.5.0/css/all.css' );
 }
 add_action('wp_enqueue_scripts', 'scupEnqueue');
 
-register_activation_hook(__FILE__, 'my_plugin_activate');
-add_action('admin_init', 'my_plugin_redirect');
-
-function my_plugin_activate() {
-    add_option('my_plugin_do_activation_redirect', true);
+/* Redirect to plugin setting page on activation */
+function scupActivationRedirect( $plugin ) 
+{
+    if( plugin_basename(__DIR__) . '/sc-scrollup.php' == $plugin )
+        exit( wp_redirect( admin_url( '/options-general.php?page=scup-setting' ) ) );
 }
-
-function my_plugin_redirect() {
-    if (get_option('my_plugin_do_activation_redirect', false)) {
-        delete_option('my_plugin_do_activation_redirect');
-        wp_redirect('options-general.php?page=styc-scrollup');
-    }
-}
+add_action( 'activated_plugin', 'scupActivationRedirect' );
 
 require_once(__DIR__. '/inc/settings.php');
 require_once(__DIR__. '/inc/front.php');

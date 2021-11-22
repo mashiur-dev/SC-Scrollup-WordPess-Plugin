@@ -1,9 +1,9 @@
 <?php
 
-
+/* Load admin assets */
 function scupLoadAdminScript()
 {
-    if ( 'settings_page_styc-scrollup'  === get_current_screen()->base )
+    if ( 'settings_page_scup-setting'  === get_current_screen()->base )
     {   
         wp_enqueue_script( array( 'jquery' ) );
         wp_enqueue_script( 'scupadmin', plugin_dir_url( __DIR__ ) . 'assets/scupadmin.js', array('jquery'), '1.0.0', true );
@@ -11,18 +11,17 @@ function scupLoadAdminScript()
         wp_enqueue_style( 'scupadmin', plugin_dir_url( __DIR__ ) . 'assets/admin.css', '1.0.0' );
     }
 }
-
-
 add_action( 'admin_enqueue_scripts', 'scupLoadAdminScript' );
 
-/* Add Settings page */
+
+/* Add settings page */
 function scupSettings()
 {
 	add_options_page(
+        'Scroll UP Options', 
         'Scroll UP', 
-        'Scrollup Options', 
         'manage_options', 
-        'styc-scrollup', 
+        'scup-setting', 
         'scupSettingsRender'
     );
 }
@@ -31,8 +30,8 @@ add_action('admin_menu', 'scupSettings');
 
 function scupSettingsSections()
 {
-    add_settings_section( 'scupSettings_section_top', __( 'General Settings', 'sc-scrollup' ), array(), 'styc-scrollup' );
-    add_settings_section( 'scupSettings_section_bottom', __( 'Distance', 'sc-scrollup' ), array(), 'styc-scrollup' );
+    add_settings_section( 'scupSettings_section_top', __( 'General Settings', 'sc-scrollup' ), array(), 'scup-setting' );
+    add_settings_section( 'scupSettings_section_bottom', __( 'Distance', 'sc-scrollup' ), array(), 'scup-setting' );
 }
 add_action( 'admin_init', 'scupSettingsSections' );
 
@@ -45,7 +44,7 @@ function scupSettingsFields()
             'id'      => 'scupSettings_width',
             'type'    => 'number',
             'section' => 'scupSettings_section_top',
-            'description' => __('Set width of the scrollup.', 'sc-scrollup' ),
+            'description' => __('Set width (px) of the scrollup.', 'sc-scrollup' ),
         ),
         
         array(
@@ -53,7 +52,7 @@ function scupSettingsFields()
             'id'      => 'scupSettings_height',
             'type'    => 'number',
             'section' => 'scupSettings_section_top',
-            'description' => __('Set height of the scrollup.', 'sc-scrollup' ),
+            'description' => __('Set height (px) of the scrollup.', 'sc-scrollup' ),
         ),
 
         array(
@@ -65,19 +64,11 @@ function scupSettingsFields()
         ),
 
         array(
-            'label'   => __( 'Font Color', 'sc-scrollup' ),
-            'id'      => 'scupSettings_font_color',
-            'type'    => 'Color',
-            'section' => 'scupSettings_section_top',
-            'description' => __('Set background color of the scrollup.', 'sc-scrollup' ),
-        ),
-
-        array(
             'label'   => __( 'Speed', 'sc-scrollup' ),
             'id'      => 'scupSettings_speed',
             'type'    => 'number',
             'section' => 'scupSettings_section_top',
-            'description' => __('Scrollup speed.', 'sc-scrollup' ),
+            'description' => __('Scrollup speed in ms.', 'sc-scrollup' ),
         ),
 
         array(
@@ -112,7 +103,7 @@ function scupSettingsFields()
             $field['id'], 
             $field['label'], 
             'scupSettingsFieldsGenerator', 
-            'styc-scrollup',
+            'scup-setting',
             $field['section'], 
             $field 
         );
@@ -122,18 +113,16 @@ function scupSettingsFields()
             case 'toggle':
             case 'checkbox':
             case 'radio':
-                register_setting( 'styc-scrollup', $field['id']);
+                register_setting( 'scup-setting', $field['id']);
                 break;
             
             default:
-                register_setting( 'styc-scrollup', $field['id'], array( 'sanitize_callback' => 'esc_attr' ) );
+                register_setting( 'scup-setting', $field['id'], array( 'sanitize_callback' => 'esc_attr' ) );
         }
     }
 
 }
-
 add_action( 'admin_init', 'scupSettingsFields' );
-
 
 
 function scupSettingsFieldsGenerator( $field )
@@ -244,7 +233,6 @@ function scupSettingsFieldsGenerator( $field )
 
 function scupSettingsRender()
 {
-
 ?>
 
 <div class="wrap scup-settings">
@@ -255,17 +243,17 @@ function scupSettingsRender()
             <?php 
             wp_nonce_field('update-options');
             
-            settings_fields( 'styc-scrollup' ); //option group , should match with register_setting('otfw-options') 
-            do_settings_sections( 'styc-scrollup' ); // setting page slug 'otfw-options'
+            settings_fields( 'scup-setting' ); //option group , should match with register_setting('otfw-options') 
+            do_settings_sections( 'scup-setting' ); // setting page slug 'otfw-options'
             submit_button();
             ?>
         </form>
     </div>
     <div class="scup-recommendations">
         <h2>Recommended Plugins</h2>
-        <p><strong><a href="https://twitter.com/MashiurR_">Follow Me</a></strong> on Twitter!</br>I'm available to hire, Email Me: <a href="mailto:mashiur.dev@gmail.com">mashiur.dev@gmail.com</a></p>
+        <div class="dev-credit"><strong><a href="https://twitter.com/MashiurR_">Follow Me</a></strong> on Twitter!</br>I'm available to hire, Contact: <a href="mailto:mashiur.dev@gmail.com">mashiur.dev@gmail.com</a></div>
         <a href="//wordpress.org/plugins/ultimate-coupon-for-woocommerce" target="_blank">
-            <img src="<?php echo esc_url( __DIR__ . '/assets/ucfw-banner.png' ); ?>" alt="">
+            <img src="<?php echo esc_url( plugins_url( '', __DIR__ ) ); ?>/assets/ucfw-banner.png" alt="">
         </a>
     </div>
 </div>

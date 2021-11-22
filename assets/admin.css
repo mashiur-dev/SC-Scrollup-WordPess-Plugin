@@ -4,7 +4,8 @@
 	flex-direction: row;
 }
 .scup-settings .scup-fields {
-	flex: 70%;
+    flex: 66%;
+    margin-right: 4%;
 }
 .scup-settings .scup-fields > h1 {
 	font-size: 18px;
@@ -23,6 +24,9 @@
   .scup-settings .scup-recommendations {
     flex: 100%;
   }
+  .scup-settings .scup-fields {
+    margin-right: 0;
+}
 }
 
 /* Recomendation */
@@ -30,10 +34,9 @@
 	max-width: 100%;
 }
 .scup-settings .scup-recommendations h2 {
-	font-size: 18px;
-	padding-left: 10px;
-	text-transform: uppercase;
-	line-height: 24px;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 24px;
 }
 .scup-settings .scup-recommendations h2:after {
 	content: "";
@@ -42,6 +45,12 @@
 	background: #2271b1;
 	display: block;
 	margin-top: 10px;
+}
+
+.dev-credit {
+    margin: 20px 0;
+    font-size: 18px;
+    line-height: 28px;
 }
 
 /* Toggle switch */
