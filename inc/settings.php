@@ -113,11 +113,19 @@ function scupSettingsFields()
             case 'toggle':
             case 'checkbox':
             case 'radio':
-                register_setting( 'scup-setting', $field['id']);
+                register_setting( 
+                    'scup-setting', 
+                    $field['id'], 
+                    array('sanitize_callback' => 'sanitize_text_field')
+                );
                 break;
             
             default:
-                register_setting( 'scup-setting', $field['id'], array( 'sanitize_callback' => 'esc_attr' ) );
+                register_setting( 
+                    'scup-setting', 
+                    $field['id'],
+                    array('sanitize_callback' => 'sanitize_text_field')
+                );
         }
     }
 
@@ -132,20 +140,20 @@ function scupSettingsFieldsGenerator( $field )
     switch ( $field['type'] ) {
         case 'textarea':
             printf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>',
-                $field['id'],
-                isset( $field['placeholder'] ) ? $field['placeholder'] : '',
-                $value
+                esc_attr($field['id']),
+                esc_attr(isset($field['placeholder']) ? $field['placeholder'] : ''),
+                esc_textarea($value)
             );
             break;
 
         case 'select':
             $options = $field['options'];
 
-            echo '<select id="'.$field['id'].'" name="'.$field['id'].'">';
+            echo '<select id="'.esc_attr($field['id']).'" name="'.esc_attr($field['id']).'">';
             foreach( $options as $option )
             {
                 $selected = ($value === $option) ? 'selected' : '';
-                printf('<option value="%s" %s>%s</option>', $option, $selected, $option );
+                printf('<option value="%s" %s>%s</option>', esc_attr($option), esc_attr($selected), esc_attr($option) );
             }
             echo "</select>";
 
@@ -159,7 +167,7 @@ function scupSettingsFieldsGenerator( $field )
                 printf ('<div class="jsp_switch">
                     <input type="checkbox" name="%s[]" id="%s" value="toggled" %s>
                     <label for="%s"></label>
-                </div>', $field['id'], $field['id'], $checked, $field['id']);
+                </div>', esc_attr($field['id']), esc_attr($field['id']), esc_attr($checked), esc_attr($field['id']));
                 break;
 
         case 'checkbox':
@@ -173,7 +181,7 @@ function scupSettingsFieldsGenerator( $field )
                     $checked = 'checked';
                 }
 
-                printf('<input type="checkbox" name="%s[]" value="%s" %s> %s <br>', $field['id'], $option, $checked, $option );
+                printf('<input type="checkbox" name="%s[]" value="%s" %s> %s <br>', esc_attr($field['id']), esc_attr($option), esc_attr($checked), esc_html($option) );
             }
             break;
         
@@ -188,7 +196,8 @@ function scupSettingsFieldsGenerator( $field )
                     $checked = 'checked';
                 }
 
-                printf('<input type="radio" name="%s[]" value="%s" %s> %s <br>', $field['id'], $option, $checked, $option );
+                printf('<input type="radio" name="%s[]" value="%s" %s> %s <br>', esc_attr($field['id']), esc_attr($option), esc_attr($checked), esc_html($option) );
+
             }
             break;
 
@@ -216,17 +225,17 @@ function scupSettingsFieldsGenerator( $field )
 
         default:
             printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />',
-                $field['id'],
-                $field['type'],
-                isset( $field['placeholder'] ) ? $field['placeholder'] : '',
-                $value
+                esc_attr($field['id']),
+                esc_attr($field['type']),
+                esc_attr(isset($field['placeholder']) ? $field['placeholder'] : ''),
+                esc_attr($value)
             );
     }
 
     if ( isset( $field['description'] ) )
     {
         if ( $desc = $field['description'] )
-            printf( '<p class="description">%s</p>', $desc );
+            printf( '<p class="description">%s</p>', esc_html($desc) );
     }
 }
 
@@ -250,11 +259,8 @@ function scupSettingsRender()
         </form>
     </div>
     <div class="scup-recommendations">
-        <h2>Recommended Plugins</h2>
-        <div class="dev-credit"><strong><a href="https://twitter.com/MashiurR_">Follow Me</a></strong> on Twitter!</br>I'm available to hire, Contact: <a href="mailto:mashiur.dev@gmail.com">mashiur.dev@gmail.com</a></div>
-        <a href="//wordpress.org/plugins/ultimate-coupon-for-woocommerce" target="_blank">
-            <img src="<?php echo esc_url( plugins_url( '', __DIR__ ) ); ?>/assets/ucfw-banner.png" alt="">
-        </a>
+        <h2>Hello!</h2>
+        <div class="dev-credit"><strong><a href="https://x.com/MashiurR_">Follow Me</a></strong> on X!</br>I'm available to hire, Contact: <a href="mailto:mashiur.dev@gmail.com">mashiur.dev@gmail.com</a></div>
     </div>
 </div>
 

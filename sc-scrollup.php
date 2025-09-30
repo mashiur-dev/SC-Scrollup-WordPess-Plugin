@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: SC Scrollup
+Plugin Name: SC Scrollup - Lightweight Scroll to Top Button
 Plugin URI: http://wordpress.org/plugins/sc-scrollup/
-Description: The Plugin will Add a scroll up button on your website. This is just not a simple scroll-up plugin, but also a friend of your users. It's highly customize-able scrollup plugin so you can make it look better as you need.
-Version: 1.5
+Description: The extremely lightweight and customizable 'Scroll to Top' button solution for WordPress. Enhance user experience with smooth back-to-top functionality, Font Awesome icons, and full design control.
+Version: 1.6
 Author: Mashiur Rahman
 Author URI: http://mashiurz.com
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires at least: 4.0
-Tested up to: 5.8
+Requires at least: 5.0
+Tested up to: 6.8
 Text Domain: sc-scrollup
 */
 
@@ -24,8 +24,11 @@ add_action('wp_enqueue_scripts', 'scupEnqueue');
 /* Redirect to plugin setting page on activation */
 function scupActivationRedirect( $plugin ) 
 {
-    if( plugin_basename(__DIR__) . '/sc-scrollup.php' == $plugin )
-        exit( wp_redirect( admin_url( '/options-general.php?page=scup-setting' ) ) );
+    if( plugin_basename(__DIR__) . '/sc-scrollup.php' == $plugin ) {
+        $redirectURL = admin_url('options-general.php?page=scup-setting');
+        wp_redirect(esc_url($redirectURL));
+        exit;
+    }
 }
 add_action( 'activated_plugin', 'scupActivationRedirect' );
 
