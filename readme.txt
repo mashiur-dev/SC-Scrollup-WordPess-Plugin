@@ -1,6 +1,6 @@
 === SC Scrollup - Lightweight Scroll to Top Button ===
 Contributors: mashiurz
-Tags: Scroll up, Scroll to top, scrollup, Smoothly scroll up, Multi color scrollup, Customizable
+Tags: Scrollup, Scroll to top, Smoothly scroll up, Multi color scrollup, Customizable
 Requires at least: 5.0
 Tested up to: 6.8
 Stable tag: 1.6
@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-A lightweight, customizable, and GDPR-friendly 'Scroll to Top' button plugin. Enhances user experience with smooth back-to-top functionality and Font Awesome icons.
+A lightweight, customizable, and GDPR-friendly 'Scroll to Top' button plugin. Enhances UX with smooth scrolling and Font Awesome icons.
 
 == Description ==
 
@@ -21,6 +21,7 @@ The **SC Scrollup** plugin is designed to instantly improve user experience (UX)
 1. **Performance-First:** It's one of the most **lightweight scroll up plugins** available, with minimal impact on your page speed.
 2. **Full Customization:** Easily change the button's appearance, size, position, and animation to **perfectly match your site's theme**.
 3. **GDPR/Privacy Ready:** Since we do not load external files (like Font Awesome or Google Fonts) from remote CDNs, it supports **GDPR compliance** and site privacy.
+4. **Accessibility (A11Y):** Built with best practices to ensure all users can easily navigate back to the top of the page.
 
 #### Key Features
 
@@ -57,7 +58,7 @@ Installing the SC Scrollup plugin is fast and simple.
 ### **Configuration**
 
 After activation, customize the button by going to:
-**Settings > Scrollup Setting**
+**Settings > ScrollUP**
 
 == Frequently Asked Questions ==
 
@@ -67,14 +68,13 @@ A: Yes. It is built using minimal JavaScript and CSS, ensuring it loads quickly 
 **Q: Are external assets used (like CDNs)?**
 A: No. All necessary assets, including icons, are self-hosted within the plugin package. This makes the plugin **GDPR compliant** and avoids security risks associated with third-party servers.
 
-**Q: Can I use my own icon?**
-A: Currently, the plugin utilizes the integrated Font Awesome library, giving you hundreds of choices. Full custom icon upload may be added in a future update.
-
 **Q: Where can I report bugs or suggest features?**
-A: Please check the Contributing section below and use our GitHub repository for all development inquiries.
+A: The best place to report bugs or seek help is the dedicated Support Forum on WordPress.org (→ https://wordpress.org/support/plugin/sc-scrollup/).
 
 == Screenshots ==
-1. Sc Scrollup Option panel
+
+1. Sc Scrollup Settings
+2. Scrollup Demo
 
 == Changelog ==
 
@@ -87,3 +87,4 @@ A: Please check the Contributing section below and use our GitHub repository for
 
 = 1.6 =
 * Fix: Addressed a minor compatibility issue specifically related to WordPress 6.8.
+* New Feature: Added icon size control options.

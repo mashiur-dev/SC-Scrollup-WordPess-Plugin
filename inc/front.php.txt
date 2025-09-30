@@ -1,0 +1,129 @@
+<?php
+function scupFront() 
+{
+	// Enqueue CSS/JS files
+	wp_enqueue_script('jquery');
+	wp_enqueue_style('fontawesome', '//use.fontawesome.com/releases/v5.5.0/css/all.css');
+
+	$arrowIcon      = (strpos(get_option('scupSettings_icon'), 'fas') !== false) ? get_option('scupSettings_icon') : 'fas fa-angle-up';
+
+	$scrollSpeed    = absint(get_option('scupSettings_speed', 500)); // Use absint for numbers
+	$width           = absint(get_option('scupSettings_width', 40));
+	$height          = absint(get_option('scupSettings_height', 30));
+	$background      = sanitize_hex_color(get_option('scupSettings_background', '#000000')); // Use sanitize_hex_color
+	$color           = sanitize_hex_color(get_option('scupSettings_icon_color', '#ffffff'));
+	$rightDistance  = absint(get_option('scupSettings_distance_right', 50));
+	$BottomDistance = absint(get_option('scupSettings_distance_bottom', 50));
+
+
+	// This securely passes PHP variables to a JavaScript object named 'scup_vars'
+	wp_localize_script('scup-script', 'scup_vars', array(
+		'scrollSpeed' => $scroll_speed,
+		'arrowIcon'   => esc_attr($arrow_icon), // Escaped for use in HTML/JS
+	));
+
+	// Pass Variables to CSS (Using wp_add_inline_style)
+	$inline_css = sprintf(
+		'#scUPscroller {
+            width: %1$dpx;
+            height: %2$dpx;
+            bottom: %3$dpx;
+            right: %4$dpx;
+            background: %5$s;
+        }
+        #scUPscroller i {
+            color: %6$s;
+        }',
+		$width,
+		$height,
+		$bottomDistance,
+		$rightDistance,
+		$background,
+		$color
+	);
+
+	wp_add_inline_style('scup-styles', $inline_css);
+
+	add_action('wp_footer', 'scup_print_button_html');
+
+	// $getSpeed = get_option('scupSettings_speed');
+	// $scrollSpeed = (!empty(trim($getSpeed))) ? $getSpeed : 500;
+
+	// $getWidth = get_option('scupSettings_width');
+	// $width = (!empty(trim($getWidth))) ? $getWidth : 40;
+
+	// $getHeight = get_option('scupSettings_height');
+	// $height = (!empty(trim($getHeight))) ? $getHeight : 30;
+
+	// $background = get_option('scupSettings_background', '#000000');
+	// $getColor = get_option('scupSettings_icon_color', '#ffffff');
+
+	// $getRightDistance = get_option('scupSettings_distance_right');
+	// $RightDistance = (!empty(trim($getRightDistance))) ? $getRightDistance : 50;
+
+	// $getBottomDistance = get_option('scupSettings_distance_bottom');
+	// $BottomDistance = (!empty(trim($getBottomDistance))) ? $getBottomDistance : 50;
+?>
+	
+	<script>
+		/*===== SC ScrolUP js ========*/
+		jQuery(document).ready(function(){
+			jQuery('body').append('<div id="scUPscroller"><i class="<?php echo esc_html( $arrowIcon ); ?>"></i></div>');
+			var scroller = jQuery('#scUPscroller'),
+				scrollSpeed = <?php echo esc_html( $scrollSpeed ); ?>;
+			jQuery(window).scroll(function(){
+				if ( jQuery(this).scrollTop() > 100 ) 
+				{
+					scroller.fadeIn();
+				}
+				else
+				{
+					scroller.fadeOut();
+				}
+			});
+			scroller.click(function()
+			{
+				jQuery("html, body").animate( { scrollTop: 0 }, scrollSpeed );
+				return false;
+			});
+		
+		});
+		
+	</script>
+	<!-- SC ScrolUP Style -->
+	<style>
+		/*===== SC Scrollup style ========*/
+		#scUPscroller
+		{
+			width:<?php echo esc_html( $width ); ?>px;
+			height:<?php echo esc_html( $height ); ?>px;
+			position:fixed;
+			bottom:<?php echo esc_html( $BottomDistance ); ?>px;
+			right:<?php echo esc_html( $rightDistance ); ?>px;
+			display:none; 
+			cursor: pointer;
+			z-index: 999999!important;
+			background:<?php echo esc_html($background); ?>;
+			opacity:0.6;
+			border-radius: 2px;
+		}
+		#scUPscroller:hover
+		{
+			opacity:0.9;
+		}
+		#scUPscroller i
+		{
+			text-align: center;
+			font-size: 24px;
+			display: block;
+			color: <?php echo esc_html($color); ?>;
+			margin: auto;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 50%;
+			margin-top: -13px;
+		}
+	</style>
+<?php }
+add_action('wp_head', 'scupFront');

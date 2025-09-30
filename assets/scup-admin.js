@@ -2,7 +2,8 @@
     "use strict";
 
     /* Range Fields Input */
-    var scupRange = $('input.range');
+    let scupRange = $('input.range');
+
     scupRange.each(function()
     {
         var thisRange = jQuery(this);
@@ -21,16 +22,28 @@
 
     });
 
+    // Icons Selector
     jQuery('.jomps-icons').each(function()
     {
-        var thisEl = jQuery(this);
-        if ( thisEl.find('input').val() !== '' )
-            thisEl.find('.jomps-icons-selector').find('li').find( '.' + thisEl.find('input').val() ).parent('li').addClass('active');
+        let thisEl = jQuery(this);
+        let selectedIcon = thisEl.find("input.sc-selected-icon").val();
+
+        if (selectedIcon !== "") {
+            let selectedIconUnique = selectedIcon.split(" ").pop();
+
+            thisEl
+              .find(".jomps-icons-selector")
+              .find("li")
+              .find("." + selectedIconUnique)
+              .parent("li")
+              .addClass("active");
+        }
+
     });
     
     jQuery('.jomps-icons-selector').find('li').on('click', function()
     {
-        var thisLi   = jQuery(this),
+        let thisLi   = jQuery(this),
             liMain   = thisLi.parents('.jomps-icons'),
             liParent = liMain.find('.jomps-icons-selector'),
             icon     = thisLi.find('i').attr('class');

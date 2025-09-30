@@ -1,0 +1,9 @@
+#scUPscroller {
+    position: fixed;
+    border: none;
+    display: none;
+    cursor: pointer;
+    z-index: 999999 !important;
+    opacity: 0.6;
+    border-radius: 2px;
+}

@@ -1,25 +1,11 @@
 <?php
 
-/* Load admin assets */
-function scupLoadAdminScript()
-{
-    if ( 'settings_page_scup-setting'  === get_current_screen()->base )
-    {   
-        wp_enqueue_script( array( 'jquery' ) );
-        wp_enqueue_script( 'scupadmin', plugin_dir_url( __DIR__ ) . 'assets/scupadmin.js', array('jquery'), '1.0.0', true );
-        wp_enqueue_style( 'fontawesome', '//use.fontawesome.com/releases/v5.5.0/css/all.css', '5.5.0' );
-        wp_enqueue_style( 'scupadmin', plugin_dir_url( __DIR__ ) . 'assets/admin.css', '1.0.0' );
-    }
-}
-add_action( 'admin_enqueue_scripts', 'scupLoadAdminScript' );
-
-
 /* Add settings page */
 function scupSettings()
 {
 	add_options_page(
-        'Scroll UP Options', 
-        'Scroll UP', 
+        'ScrollUP Options', 
+        'ScrollUP', 
         'manage_options', 
         'scup-setting', 
         'scupSettingsRender'
@@ -31,7 +17,10 @@ add_action('admin_menu', 'scupSettings');
 function scupSettingsSections()
 {
     add_settings_section( 'scupSettings_section_top', __( 'General Settings', 'sc-scrollup' ), array(), 'scup-setting' );
+
     add_settings_section( 'scupSettings_section_bottom', __( 'Distance', 'sc-scrollup' ), array(), 'scup-setting' );
+
+    add_settings_section('scupSettings_section_icon', __('Icons', 'sc-scrollup'), array(), 'scup-setting');
 }
 add_action( 'admin_init', 'scupSettingsSections' );
 
@@ -91,8 +80,16 @@ function scupSettingsFields()
             'label'   => esc_html__( 'Icon', 'sc-scrollup' ),
             'id'      => 'scupSettings_icon',
             'type'    => 'icons',
-            'section' => 'scupSettings_section_bottom',
+            'section' => 'scupSettings_section_icon',
             'description' => esc_html__('Select icon.', 'sc-scrollup' ),
+        ),
+
+        array(
+            'label'   => __('Icon Size', 'sc-scrollup'),
+            'id'      => 'scupSettings_icon_size',
+            'type'    => 'number',
+            'section' => 'scupSettings_section_icon',
+            'description' => __('Icon Size in (px).', 'sc-scrollup'),
         )
         
     );
@@ -219,7 +216,7 @@ function scupSettingsFieldsGenerator( $field )
                     <li><i class="fas fa-long-arrow-alt-up"></i></li>
                     <li><i class="fas fa-sort-up"></i></li>
                 </ul>
-                <input type="hidden" name="%s" value="%s">
+                <input class="sc-selected-icon" type="hidden" name="%s" value="%s">
             </div>', esc_attr( $field['id'] ), esc_attr( $field['id'] ), esc_attr( $value ));
             break;
 
@@ -239,7 +236,6 @@ function scupSettingsFieldsGenerator( $field )
     }
 }
 
-
 function scupSettingsRender()
 {
 ?>
@@ -258,6 +254,7 @@ function scupSettingsRender()
             ?>
         </form>
     </div>
+
     <div class="scup-recommendations">
         <h2>Hello!</h2>
         <div class="dev-credit"><strong><a href="https://x.com/MashiurR_">Follow Me</a></strong> on X!</br>I'm available to hire, Contact: <a href="mailto:mashiur.dev@gmail.com">mashiur.dev@gmail.com</a></div>
