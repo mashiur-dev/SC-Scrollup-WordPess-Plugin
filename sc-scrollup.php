@@ -3,7 +3,7 @@
 Plugin Name: SC Scrollup - Lightweight Scroll to Top Button
 Plugin URI: http://wordpress.org/plugins/sc-scrollup/
 Description: A lightweight, customizable, and GDPR-friendly 'Scroll to Top' button plugin. Enhances UX with smooth scrolling and Font Awesome icons.
-Version: 1.6
+Version: 1.6.5
 Author: Mashiur Rahman
 Author URI: http://mashiurz.com
 License: GPLv3
@@ -13,7 +13,11 @@ Tested up to: 6.8
 Text Domain: sc-scrollup
 */
 
-define('VERSION', time()); //1.6
+define('VERSION', "1.6.5"); //time()
+
+/*****************
+ * Load front assets
+ ****************/
 function scupEnqueueFront()
 {
     // Enqueue CSS/JS files
@@ -23,11 +27,13 @@ function scupEnqueueFront()
     wp_enqueue_style('scup-styles', plugins_url('assets/scup-front.css', __FILE__), array(), VERSION);
 
     // Enqueue a dedicated JS file (scup-front.js) which contains the core scroll logic
-    wp_enqueue_script('scup-script', plugins_url('assets/scup-front.js', __FILE__), array('jquery'), VERSION, true);
+    wp_enqueue_script('scup-script', plugins_url('assets/scup-front.js', __FILE__), array(), VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'scupEnqueueFront');
 
-/* Load admin assets */
+/*****************
+ * Load admin assets
+ ****************/
 function scupEnqueueAdmin()
 {
     if ('settings_page_scup-setting'  === get_current_screen()->base) {
@@ -40,7 +46,9 @@ function scupEnqueueAdmin()
 }
 add_action('admin_enqueue_scripts', 'scupEnqueueAdmin');
 
-/* Redirect to plugin setting page on activation */
+/***********
+* Redirect to plugin setting page on activation 
+***********/
 function scupActivationRedirect( $plugin ) 
 {
     if( plugin_basename(__DIR__) . '/sc-scrollup.php' == $plugin ) {
@@ -53,6 +61,3 @@ add_action( 'activated_plugin', 'scupActivationRedirect' );
 
 require_once(__DIR__. '/inc/settings.php');
 require_once(__DIR__. '/inc/front.php');
-
-
-?>

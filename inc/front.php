@@ -8,9 +8,9 @@ function scupFront()
 	}
 
 	// Scroll Speed
-	$scrollSpeed = absint(get_option('scupSettings_speed', 500));
+	$scrollSpeed = absint(get_option('scupSettings_speed', 400));
 	if (0 === $scrollSpeed) {
-		$scrollSpeed = 500; // Fallback to default if stored value was 0 or invalid
+		$scrollSpeed = 400; // Fallback to default if stored value was 0 or invalid
 	}
 
 	// Width
